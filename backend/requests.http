@@ -1,0 +1,36 @@
+###
+
+POST http://localhost:8500/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Matthews",
+"tarea": "comer",
+"descripcion": "tiene hambre",
+"estado": "true"
+}
+
+
+###
+GET http://localhost:8500/api/users HTTP/1.1
+
+
+###
+
+GET http://localhost:8500/api/users/63e523540f8f8f449ca16013 HTTP/1.1
+
+###
+
+PUT http://localhost:8500/api/users/63e523540f8f8f449ca16013 HTTP/1.1
+Content-Type: application/json
+
+{
+"name": "Matthews",
+"tarea": "Jugar",
+"descripcion": "Jugar Play",
+"estado": "true"
+}
+
+###
+
+DELETE http://localhost:8500/api/users/63e523540f8f8f449ca16013  HTTP/1.1
