@@ -1,55 +1,73 @@
-import React from 'react'
-import { Menu } from '../SideMenu/Menu';
-import { Box, Button, FormControl, FormLabel, Heading, Input } from '@chakra-ui/react';
+import React, { useState } from "react";
+import { useAuthStore } from "../redux/zustand";
+import { loginRequest } from "../redux/axios";
+import { useNavigate } from "react-router-dom";
+import "../style/login.css";
+import { Menu } from "../SideMenu/Menu";
+const Login = () => {
+  const navigate = useNavigate();
 
-export const Login = () => {
+  const [dataLogin, setDataLogin] = useState({
+    username: "",
+    password: "",
+  });
+
+  const setProfileAuth = useAuthStore((state) => state.setProfile);
+  const onChange = (e) => {
+    e.preventDefault();
+    setDataLogin({ ...dataLogin, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = await loginRequest(dataLogin);
+    console.log(data);
+    setProfileAuth(data?.data);
+    navigate("/About");
+  };
+
   return (
-    <Box>
+    <>
       <Menu />
-      <Box
-        height={"779px"}
-        display={"flex"}
-        alignItems={"center"}
-        width={"100%"}
-        justifyContent="center"
-      >
-        <Box
-          maxW="50%"
-          height="50%"
-          margin="30px"
-          borderWidth="1px"
-          borderRadius="lg"
-          overflow="hidden"
-          bgColor="#ffff"
-        >
-          <FormControl display={"flex"} flexDirection="column" padding="10px">
-            <Heading textAlign="center">Ingresa</Heading>
-            <FormLabel>Usuario</FormLabel>
-            <Input
-              type="text"
-              placeholder="Usuario"
-              variant="filled"
-              htmlSize={40}
-              width="auto"
-            />
-            <FormLabel>Contraseña</FormLabel>
-            <Input
-              type="text"
-              placeholder="Contraseña"
-              variant="filled"
-              htmlSize={40}
-              width="auto"
-            />
-            <Button colorScheme="whatsapp" margin={"10px"}>
-              Ingresar
-            </Button>
-            <Button colorScheme="red" margin={"10px"}>
-              {" "}
-              Registrar
-            </Button>
-          </FormControl>
-        </Box>
-      </Box>
-    </Box>
+      <div className="Principal-container">
+        <div className="principal">
+          <div className="form-container">
+            <form action="" onSubmit={handleSubmit}>
+              <h1 className="text"> Ingresa Con Tu Usuario</h1>
+              <input
+                placeholder="Usuario"
+                type="username"
+                name="username"
+                onChange={onChange}
+              />
+              <input
+                placeholder="Contraseña"
+                type="password"
+                name="password"
+                onChange={onChange}
+              />
+              <button type="submit" className="button">
+                Ingresar
+              </button>
+              <button type="submit" className="button">
+                <a href="/Registrate">Registrar</a>
+              </button>
+            </form>
+          </div>
+          <div className="overlay-container">
+            <div className="overlay">
+              <div className="overlay-panel overlay-left">
+                <h1>¡Bienvenidos!</h1>
+                <p>
+                  Para realizar tus tareas , Iniciando Seccion con tus Datos
+                  Personales
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
-}
+};
+
+export default Login;

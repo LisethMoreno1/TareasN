@@ -3,13 +3,14 @@
    padding: 0;
  }
 
- body,
+ body.chakra-ui-light,
  html {
    margin: 0;
-   font-family: Helvetica, sans-serif;
    background-color: #9c9999;
    width: 100%;
    height: 100%;
+  font-family: 'Kanit', sans-serif;
+ 
  }
  #root{
   width: 100%;

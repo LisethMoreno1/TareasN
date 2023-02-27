@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+
+.section-a {
+  font-family: 'Montserrat', sans-serif;
+  height: 92%;
+  width: 100%;
+  /* background: linear-gradient(to right, #f3c36e, #f5b003) no-repeat 0 0 / cover;
+      color: #fff; */
+  display: flex;
+}
+
+
+
+.text {
+  font-weight: bold;
+  margin: 0;
+}
+
+
+.section-b {
+  font-family: 'Montserrat', sans-serif;
+  height: 92vh;
+  width: 70%;
+  background: #a9a9a9;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+}
+
+
+.principal-container {
+  position: relative;
+  background: linear-gradient(to right, #f3c36e, #f5b003) no-repeat 0 0 / cover;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .2), 0 10px 10px rgba(0, 0, 0, .2);
+  height: 100%;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.Imagen-contenedor {
+  width: 150%;
+  position: relative;
+  margin-left: -500px;
+
+
+}
+
+.section-title {
+  width: 95%;
+  height: 50%;
+
+}
+
+.h1-estilo {
+  font-size: 150px;
+  font-family: 'Anton', sans-serif;
+  color: #f3c36e;
+  letter-spacing: 20px;
+
+}
+
+.h4-estilo {
+  font-size: 40px;
+  margin-top: 60px;
+  font-family: 'Anton', sans-serif;
+    letter-spacing: 5px;
+}
+
+.section-titulos-h1-h4 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+}
+
+.h1-estilo-2 {
+  font-size: 150px;
+  font-family: 'Anton', sans-serif;
+  color: #f3c36e;
+  margin-top: -80px;
+  letter-spacing: 20px;
+}
+
+.p-estilo {
+  font-size: 20px;
+  
+}

@@ -6,7 +6,7 @@ import { Menu } from "../SideMenu/Menu";
 export const About = () => {
   return (
     <>
-      <Menu />
+      <Menu  />
       <Index />
     </>
   );

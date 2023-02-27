@@ -1,21 +1,7 @@
 import React from "react";
-
-import {
-  List,
-  ListItem,
-  ListIcon,
-  Box,
-  Card,
-  CardHeader,
-  Heading,
-  Stack,
-  CardBody,
-  Text,
-} from "@chakra-ui/react";
-
-import { MdCheckCircle } from "react-icons/md";
-import { AiFillGithub } from "react-icons/ai";
+import { Heading } from "@chakra-ui/react";
 import { Menu } from "../SideMenu/Menu";
+import "../style/sobrenosotros.css";
 
 export default function SobreNosotros() {
   return (
@@ -24,78 +10,53 @@ export default function SobreNosotros() {
         <Menu />
       </div>
 
-      <Card
-        margin={"2px"}
-        padding="5px"
-        w={"80%"}
-        h={"80%"}
-        alignContent={"center"}
-        justifyContent={"center"}
-      >
-        <CardHeader>
-          <Heading size="md" textAlign={"center"}>
-            Sobre Nosotros
-          </Heading>
-        </CardHeader>
+      <div className="container-timeline">
+        <div className="timeline">
+          <ul>
+            <li>
+              <div className="timeline-content">
+                <h1>Sobre Nosotros</h1>
+                <p className="titulos-1">
+                  Mi Lista de tarea es un sistema que pretente ayudarte en
+                  procesos rutinarios los cual deseas agendar para recordar en
+                  el futuro. Es un sistema que pretende ser interactivo con el
+                  usuario para asi facilitar la experiencia de el usuario con
+                  una bonita interfaz.
+                </p>
+              </div>
+            </li>
+            <li>
+              <div className="timeline-content">
+                <h1>Te ofrecemos</h1>
+                <p className="titulos-1">
+                  <> Crear tus tareas, </>
+                  <> Poder editar tus tareas,</>
+                  <> Eliminar tus tareas, </>
+                  <> Marcar tus tareas completadas </>
+                </p>
+              </div>
+            </li>
+            <li>
+              <div className="timeline-content">
+                <h1>Herramientas</h1>
+                <p className="titulos-1">
+                  <>Lenguaje : Javascript y React ,</>
+                  <>Libreria : sweetalert2, </>
+                  <>Icon: Reac Icon ,</>
+                  <>Chakra UI</>
+                </p>
+              </div>
+            </li>
 
-        <CardBody>
-          <Heading as="h4" size="md">
-            Mi lista de Tarea
-          </Heading>
-          <hr />
-          <p>
-            Mi Lista de tarea es un sistema que pretente ayudarte en procesos
-            rutinarios los cual deseas agendar para recordar en el futuro.
-            <br />
-            Es un sistema que pretende ser interactivo con el usuario para asi
-            facilitar la experiencia de el usuario con una bonita interfaz.{" "}
-          </p>
-          <br />
-          <List spacing={3}>
-            <p style={{ color: "black" }}>Funciones que puedes encontrar</p>
-            <ListItem>
-              <ListIcon as={MdCheckCircle} color="black" />
-              Crear Tareas sin limites
-            </ListItem>
-            <ListItem>
-              <ListIcon as={MdCheckCircle} color="black" />
-              Buscar Tareas que hayas realizado
-            </ListItem>
-            <ListItem>
-              <ListIcon as={MdCheckCircle} color="black" />
-              Eliminar tareas
-            </ListItem>
-
-            <ListItem>
-              <ListIcon as={MdCheckCircle} color="black" />Y más Actualizaciones
-              en el Furuto
-            </ListItem>
-            <ListItem>
-              <p> Herramientas de Desarrollo</p>
-              <ul>
-                <li>Lenguaje : Javascript y React</li>
-                <li> Libreria : sweetalert2 </li>
-                <li>Icon :Reac Icon</li>
-              </ul>
-            </ListItem>
-          </List>
-
-          <br />
-          <hr />
-          <div>
-            <p>
-              Desarrollador :<span> Liseth Moreno</span>
-            </p>
-
-            <p>
-              <a href="https://github.com/LisethMoreno1">
-                <AiFillGithub />
-                Github
-              </a>
-            </p>
-          </div>
-        </CardBody>
-      </Card>
+            <li>
+              <div className="timeline-content">
+                <h1>Desarrolladora</h1>
+                <p className="titulos-1">Liseth Moreno</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
