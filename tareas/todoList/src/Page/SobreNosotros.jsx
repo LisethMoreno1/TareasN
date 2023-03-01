@@ -1,6 +1,5 @@
 import React from "react";
-import { Heading } from "@chakra-ui/react";
-import { Menu } from "../SideMenu/Menu";
+import { Menu } from "./Menu";
 import "../style/sobrenosotros.css";
 
 export default function SobreNosotros() {

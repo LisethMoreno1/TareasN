@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { useDeleteTareaMutation, useEditarEstadoMutation, useEditarTareaMutation } from "../redux/Api";
 import {
-  Alert,
-  AlertIcon,
-  Badge,
+  useDeleteTareaMutation,
+  useEditarEstadoMutation,
+  useEditarTareaMutation,
+} from "../redux/Api";
+import {
   Box,
   Button,
   Card,
@@ -19,7 +20,6 @@ import { AiFillDelete, AiFillEdit, AiFillSave } from "react-icons/ai";
 import Swal from "sweetalert2";
 import { useAuthStore } from "../redux/zustand";
 
-
 export const TodoItem = ({ todo }) => {
   const [tarea, setTarea] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -33,9 +33,12 @@ export const TodoItem = ({ todo }) => {
 
   const profileAuth = useAuthStore((state) => state.profile);
 
+  //FUNCION PARA ELIMINAR TAREAS
   const eliminar = (_id) => {
     deleteTask({ _id, token: profileAuth.token });
   };
+
+  //FUNCION PARA EDITAR TAREAS
   const editar = (_id, tarea, descripcion) => {
     update({
       _id,
@@ -43,7 +46,6 @@ export const TodoItem = ({ todo }) => {
       token: profileAuth.token,
     });
   };
-
 
   const handleOnChangue = (e) => {
     e.preventDefault();
@@ -68,16 +70,8 @@ export const TodoItem = ({ todo }) => {
     }
   };
 
-  
-    const estado = (_id, tarea, descripcion) => {
-      updateEstado({
-        _id,
-        actualizar: { tarea: tarea, descripcion: descripcion },
-        checked: false,
-        token: profileAuth.token,
-      });
-      onChangeBox();
-    };
+
+//FUNCIONES PARA LAS ALERTAS 
   function fireSweetAlert() {
     const Toast = Swal.mixin({
       toast: true,
@@ -156,100 +150,97 @@ export const TodoItem = ({ todo }) => {
       </Card>
     </>
   ) : (
-
-      <Card margin={"1px"} w="100%" padding={"10px"} height="100%">
-        <Box>
-          <Box alignItems={"center"} justifyContent="center">
-            <Heading
-              as="h5"
-              size="sm"
-              display="flex"
-              alignItems={"center"}
-              justifyContent="center"
-              width="100%"
-              height="25px"
-              bg={"#F5B003"}
-              borderRadius={"15px"}
-            >
-              Tarea
-            </Heading>
-            <Text marginLeft={"5px"} marginTop={"10px"} marginBottom={"10px"}>
-              {todo.tarea}
-            </Text>
-            <hr />
-            <Heading
-              as="h5"
-              size="sm"
-              display="flex"
-              alignItems={"center"}
-              justifyContent="center"
-              marginTop={"15px"}
-            >
-              Descripcion
-            </Heading>
-            <Text marginTop="10px">{todo.descripcion}</Text>
-          </Box>
-          <Box
-            width="100%"
+    <Card margin={"1px"} w="100%" padding={"10px"} height="100%">
+      <Box>
+        <Box alignItems={"center"} justifyContent="center">
+          <Heading
+            as="h5"
+            size="sm"
             display="flex"
-            alignItems="center"
+            alignItems={"center"}
             justifyContent="center"
-            margin="auto"
+            width="100%"
+            height="25px"
+            bg={"#F5B003"}
+            borderRadius={"15px"}
           >
-            <div className="round" style={{ width: "70%", marginLeft: "5px" }}>
-              <input
-                type="checkbox"
-                checked={checked}
-                onChange={() => {
-                      estado(todo._id, tarea, descripcion);
-                  onChangeBox(todo._id);
-                }}
-              />
-              {tareaRealizada ? (
-                <>
-                  <b style={{ color: "green" }}>Realizada</b>
-                </>
-              ) : (
-                <>
-                  <b style={{ color: "red" }}>No Realizada</b>
-                </>
-              )}
-            </div>
+            Tarea
+          </Heading>
+          <Text marginLeft={"5px"} marginTop={"10px"} marginBottom={"10px"}>
+            {todo.tarea}
+          </Text>
+          <hr />
+          <Heading
+            as="h5"
+            size="sm"
+            display="flex"
+            alignItems={"center"}
+            justifyContent="center"
+            marginTop={"15px"}
+          >
+            Descripcion
+          </Heading>
+          <Text marginTop="10px">{todo.descripcion}</Text>
+        </Box>
+        <Box
+          width="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          margin="auto"
+        >
+          <div className="round" style={{ width: "70%", marginLeft: "5px" }}>
+            <input
+              type="checkbox"
+              checked={checked}
+              onChange={() => {
+                onChangeBox(todo._id);
+              }}
+            />
+            {tareaRealizada ? (
+              <>
+                <b style={{ color: "green" }}>Realizada</b>
+              </>
+            ) : (
+              <>
+                <b style={{ color: "red" }}>No Realizada</b>
+              </>
+            )}
+          </div>
 
-            <Box
-              p="4"
-              width="60%"
-              display={"flex"}
-              alignItems={"center"}
-              justifyContent={"flex-end"}
+          <Box
+            p="4"
+            width="60%"
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"flex-end"}
+          >
+            <Button
+              className="btn-delete"
+              onClick={() => eliminar(todo._id)(fireSweetAlert())}
+              bg={"transparent"}
+              _hover={{ bg: "none" }}
             >
-              <Button
-                className="btn-delete"
-                onClick={() => eliminar(todo._id)(fireSweetAlert())}
-                bg={"transparent"}
-                _hover={{ bg: "none" }}
-              >
-                <AiFillDelete color="red" />
-              </Button>
-              <Spacer />
-              <Button
-                className="btn-delete"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIndexEdit(todo._id);
-                  setActuEdit(!actuEdit);
-                  setTarea(todo.tarea);
-                  setDescripcion(todo.descripcion);
-                }}
-                bg="transparent"
-                _hover={{ bg: "none" }}
-              >
-                <AiFillEdit color="green" />
-              </Button>
-            </Box>
+              <AiFillDelete color="red" />
+            </Button>
+            <Spacer />
+            <Button
+              className="btn-delete"
+              onClick={(e) => {
+                e.preventDefault();
+                setIndexEdit(todo._id);
+                setActuEdit(!actuEdit);
+                setTarea(todo.tarea);
+                setDescripcion(todo.descripcion);
+              }}
+              bg="transparent"
+              _hover={{ bg: "none" }}
+            >
+              <AiFillEdit color="green" />
+            </Button>
           </Box>
         </Box>
-      </Card>
- 
+      </Box>
+    </Card>
   );
 };

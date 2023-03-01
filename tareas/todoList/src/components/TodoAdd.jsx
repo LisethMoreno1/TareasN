@@ -10,13 +10,14 @@ import { useAuthStore } from "../redux/zustand";
 import Swal from "sweetalert2";
 
 export const TodoAdd = () => {
-
-
   const profileAuth = useAuthStore((state) => state.profile);
-  const [crearTarea, { data, error, isError, isSuccess }] = usePostAñadirMutation();
+  const [crearTarea, { data, error, isError, isSuccess }] =
+    usePostAñadirMutation();
   const [tarea, setTarea] = useState();
   const [descripcion, setDescripcion] = useState();
 
+
+//FUNCION PARA CREAR LAS TAREAS 
   const onFormSubmit = (e) => {
     e.preventDefault();
     const tarea = e.target.tarea.value;
@@ -28,11 +29,11 @@ export const TodoAdd = () => {
       token: profileAuth.token,
     });
 
-   
     setDescripcion("");
     setTarea("");
   };
 
+  //FUNCIONES PARA LAS ALERTAS
   function TareaRealizada() {
     const Toast = Swal.mixin({
       toast: true,

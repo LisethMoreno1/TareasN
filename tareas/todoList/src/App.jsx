@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./index";
 import  Login  from "./Home/Login";
-import { Menu } from "./SideMenu/Menu";
+import { Menu } from "./Page/Menu";
 import { About } from "./Page/About";
 import "./style/index.css";
 import SobreNosotros from "./Page/SobreNosotros";
-import { Principal } from "./SideMenu/principal";
+import { Principal } from "./Page/principal";
 import Registrate from "./Home/registrar";
 
 

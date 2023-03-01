@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 export const useAuthStore = create(
+  //NOS PERMITE GUARDAR DATOS PREDETERMINADOS EN EL SESSIONSTORAGE
   persist(
     (set) => ({
       setToken: (token) =>

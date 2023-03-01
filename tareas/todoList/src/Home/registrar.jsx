@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../style/login.css";
-import { Menu } from "../SideMenu/Menu";
-import { usePostAñadirUsuarioMutation } from "../redux/Api";
+import { Button } from "@chakra-ui/react";
+import { Menu } from "../Page/Menu";
+import { usePostAñadirUsuarioNuevoMutation } from "../redux/Api";
+import Swal from "sweetalert2";
 
 
 
@@ -10,7 +12,7 @@ import { usePostAñadirUsuarioMutation } from "../redux/Api";
 const Registrate = () => {
   const navigate = useNavigate();
   const [crearUsuario, { data, error, isError, isSuccess }] =
-    usePostAñadirUsuarioMutation();
+    usePostAñadirUsuarioNuevoMutation();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
@@ -24,10 +26,46 @@ const Registrate = () => {
        username, password
     
   });
+if(isSuccess){
 
-    setUsername("");
-    setPassword("");
-     navigate("/Login");
+  setUsername("");
+  setPassword("");
+  navigate("/Login");
+   const Toast = Swal.mixin({
+       toast: true,
+       position: "top-end",
+       showConfirmButton: false,
+       timer: 3000,
+       timerProgressBar: true,
+       didOpen: (toast) => {
+         toast.addEventListener("mouseenter", Swal.stopTimer);
+         toast.addEventListener("mouseleave", Swal.resumeTimer);
+       },
+     });
+
+     Toast.fire({
+       icon: "success",
+       title: "Usuario Creado Con Exito",
+     });
+    
+}else {
+     const Toast = Swal.mixin({
+       toast: true,
+       position: "top-end",
+       showConfirmButton: false,
+       timer: 3000,
+       timerProgressBar: true,
+       didOpen: (toast) => {
+         toast.addEventListener("mouseenter", Swal.stopTimer);
+         toast.addEventListener("mouseleave", Swal.resumeTimer);
+       },
+     });
+
+     Toast.fire({
+       icon: "error",
+       title: "Error De Registro, Intentar de nuevo",
+     });
+    }
   };
   
 
@@ -38,7 +76,7 @@ const Registrate = () => {
       <div className="Principal-container">
         <div className="principal">
           <div className="form-container">
-            <form action="" onSubmit={onFormSubmit}>
+            <form  onSubmit={onFormSubmit}>
               <h1 className="text"> Registrate en nuestro Sitio</h1>
               <input
                 placeholder="Usuario"
@@ -56,9 +94,16 @@ const Registrate = () => {
                   setPassword(e.target.value);
                 }}
               />
-              <button type="submit" className="button">
+              <Button
+                color={"white"}
+                bg={"#f5b003"}
+                margin={"5px"}
+                _hover={{ bg: "#FFA900" }}
+                type="submit"
+                className="button"
+              >
                 Ingresar
-              </button>
+              </Button>
             </form>
           </div>
           <div className="overlay-container">

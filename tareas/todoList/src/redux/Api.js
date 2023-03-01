@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 
-// Define a service using a base URL and expected endpoints
+// Definir un servicio utilizando una URL base y expected endpoints
 export const Api = createApi({
   reducerPath: "Api",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8500/api" }),
@@ -29,10 +29,10 @@ export const Api = createApi({
       }),
       invalidatesTags: ["alias", "refreshDatosTabla"],
     }),
-    postAñadirUsuario: builder.mutation({
+    postAñadirUsuario: builder.query({
       query: (datosRegistro) => ({
         headers: { "Content-Type": "application/json" },
-        method: "POST",
+        method: "PATCH",
         body: datosRegistro,
         url: "/usuarios",
       }),
@@ -55,25 +55,35 @@ export const Api = createApi({
       }),
       invalidatesTags: ["alias", "refreshDatosTabla"],
     }),
+
     editarEstado: builder.mutation({
-      query: ({ _id, actualizar, estado }) => ({
-        headers: { "Content-Type": "application/json" },
+      query: ({ _id, actualizarEstado, token }) => ({
+        headers: { "Content-Type": "application/json", token },
         method: "PUT",
-        url: `/tareas/${_id} , ${estado}`,
-        body: actualizar,
+        url: `/tareas/${_id}`,
+        body: actualizarEstado,
+      }),
+      invalidatesTags: ["alias", "refreshDatosTabla"],
+    }),
+    postAñadirUsuarioNuevo: builder.mutation({
+      query: (añadirUsuario) => ({
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: añadirUsuario,
+        url: "/usuarios",
       }),
       invalidatesTags: ["alias", "refreshDatosTabla"],
     }),
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
+// exportar hook para su uso en componentes funcionales, que son autogenerados en función de los extremos definidos
 export const {
   useGetTareaQuery,
   usePostAñadirMutation,
   useDeleteTareaMutation,
   useEditarTareaMutation,
   useEditarEstadoMutation,
-  usePostAñadirUsuarioMutation,
+  usePostAñadirUsuarioQuery,
+  usePostAñadirUsuarioNuevoMutation
 } = Api;

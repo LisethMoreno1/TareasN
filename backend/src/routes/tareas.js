@@ -2,8 +2,12 @@ const express = require("express");
 const router = express.Router();
 const tareaSchema = require("../models/tareas");
 const ComprobarToken = require("../middleware/ComprobarToken");
-//create rutas
 
+
+
+
+
+//Create rutas
 router.post("/tareas",ComprobarToken, (req, res) => {
   const tarea = tareaSchema(req.body);
   tarea._idUser = req.headers._id;
@@ -14,7 +18,7 @@ router.post("/tareas",ComprobarToken, (req, res) => {
 });
 
 //get all tarea
-router.get("/tareas",ComprobarToken, (req, res) => {
+router.get("/tareas", ComprobarToken, (req, res) => {
   const {_id}=req.headers;
   tareaSchema
     .find({_idUser : `${_id}`})
@@ -35,7 +39,7 @@ router.get("/tareas/:id", (req, res) => {
 });
 
 
-// Actualizar  tarea
+// Actualizar tarea
 
 router.put("/tareas/:id", (req, res) => {
   const { id } = req.params;
@@ -57,7 +61,7 @@ router.delete("/tareas/:id", (req, res) => {
     .catch((error) => res.json({ message: error }));
 });
 
-// editar estado
+// Editar estado
 
 router.put("/tareas/:id", (req, res) => {
   const { id } = req.params;

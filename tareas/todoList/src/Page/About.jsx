@@ -1,6 +1,6 @@
 import React from "react";
 import Index from "../index";
-import { Menu } from "../SideMenu/Menu";
+import { Menu } from "./Menu";
 
 
 export const About = () => {

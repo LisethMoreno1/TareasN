@@ -13,7 +13,7 @@ Router.post("/usuarios", (req, res) => {
     .catch((error) => res.json({ message: error }));
 });
 
-//get all tarea
+//get Ususario
 Router.get("/usuarios/:id", (req, res) => {
   usuariosSchema
     .find()
@@ -21,13 +21,14 @@ Router.get("/usuarios/:id", (req, res) => {
     .catch((error) => res.json({ message: error }));
 });
 
+  //Patch para loguear a usuario
 Router.patch("/usuarios", async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password)
     return res
       .status(404)
-      .json({ message: "Se requiere usuario y contraseña para esta peticion" });
+      .json({ message: "Se requiere Usuario y Contraseña para Ingresar" });
   try {
     const usuarios = await usuariosSchema.findOne({
       username: username,
@@ -35,10 +36,10 @@ Router.patch("/usuarios", async (req, res) => {
     if (!usuarios)
       return res
         .status(404)
-        .json({ message: "Usuario no registrado", usuarios: null });
+        .json({ message: "Usuario No Registrado", usuarios: null });
 
     if (password !== usuarios.password)
-      return res.status(401).json({ message: "contraseña incorrecta" });
+      return res.status(401).json({ message: "Contraseña Incorrecta" });
 
     const token = jwt.sign(
       {
@@ -49,51 +50,12 @@ Router.patch("/usuarios", async (req, res) => {
         expiresIn: 60 * 60,
       }
     );
-    res.json({ usuarios, message: "signed in", token });
+    res.json({ usuarios, message: "Registrado", token });
   } catch (error) {
     res.status(500).json({ message: "error hablar  con admin" });
   }
 });
 
-// router.get("/usuarios/:id", (req, res) => {
-//   const { id } = req.params;
-//   usuariosSchema
-//     .findById(id)
-//     .then((data) => res.json(data))
-//     .catch((error) => res.json({ message: error }));
-// });
-
-// // Actualizar  tarea
-
-// router.put("/usuarios/:id", (req, res) => {
-//   const { id } = req.params;
-//   const { name, estado, tarea, descripcion } = req.body;
-//   usuariosSchema
-//     .updateOne({ _id: id }, { $set: { name, estado, tarea, descripcion } })
-//     .then((data) => res.json(data))
-//     .catch((error) => res.json({ message: error }));
-// });
-
-// // Eliminar  tarea
-
-// router.delete("/usuarios/:id", (req, res) => {
-//   const { id } = req.params;
-//   usuariosSchema
-//     .remove({ _id: id })
-//     .then((data) => res.json(data))
-//     .catch((error) => res.json({ message: error }));
-// });
-
-// // editar estado
-
-// router.put("/usuarios/:id", (req, res) => {
-//   const { id } = req.params;
-//   const { estado } = req.body;
-//   usuariosSchema
-//     .updateOne({ _id: id }, { $set: { estado } })
-//     .then((data) => res.json(data))
-//     .catch((error) => res.json({ message: error }));
-// });
 
 module.exports = Router;
 
