@@ -39,7 +39,9 @@ Router.patch("/usuarios", async (req, res) => {
         .json({ message: "Usuario No Registrado", usuarios: null });
 
     if (password !== usuarios.password)
-      return res.status(401).json({ message: "Contraseña Incorrecta" });
+      return res
+        .status(401)
+        .json({ message: "Contraseña o Usuario Incorrecta" });
 
     const token = jwt.sign(
       {
